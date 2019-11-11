@@ -1,5 +1,10 @@
 """
 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+
+T :
+两个方向：
+1. 认识问题，解决方案是随着对问题的认识而逐渐清晰的
+2. 将想法变成现实的能力
 """
 
 # Definition for singly-linked list.
@@ -8,8 +13,13 @@ class ListNode(object):
         self.val = x
         self.next = None
 
-
 class Solution(object):
+
+    T_T ="""
+        两个方向：
+        1. 认识问题，解决方案是随着对问题的认识而逐渐清晰的
+        2. 将想法变成现实的能力
+        """
 
     def removeNthFromEnd(self, head, n):
         """
