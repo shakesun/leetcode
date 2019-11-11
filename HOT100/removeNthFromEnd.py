@@ -10,29 +10,28 @@ class ListNode(object):
 
 
 class Solution(object):
+
     def removeNthFromEnd(self, head, n):
         """
         :type head: ListNode
         :type n: int
         :rtype: ListNode
         """
-        org_head = head
-        head_for_iter = head
-        cnt = 0
-        if head.next is None:
-            head.val = None
-            return
+        # 设置哑点，这点自己没想到
+        dummy = ListNode(0)
+        dummy.next = head
+        first = dummy
+        second = dummy
+        for i in range(n+1):
+            first = first.next
         while True:
-            if cnt >= n + 1:
-                head = head.next
-            cnt += 1
-            head_for_iter = head_for_iter.next
-            if head_for_iter is None:
-                if head == org_head:
-                    return org_head.next
-                head.next = head.next.next
+            if first is None:
                 break
-        return org_head
+            first = first.next
+            second = second.next
+
+        second.next = second.next.next
+        return dummy.next
 
     def iter_node(self, head):
         """
