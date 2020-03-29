@@ -13,3 +13,4 @@ def dfs(i, ans):
 
 if __name__ == "__main__":
     print(dfs(0,0))
+ 
