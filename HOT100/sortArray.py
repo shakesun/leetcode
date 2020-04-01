@@ -17,34 +17,8 @@ class Solution(object):
     #         nums[i], nums[min_index] = nums[min_index], nums[i]
     #     return nums
 
-    # 2. 归并排序
-    def sortArray(self, nums):
-        if len(nums) < 2:
-            return nums
 
-        minddle = len(nums)//2
-        left = nums[:minddle]
-        right = nums[minddle:]
-
-        return self.merge_sort(self.sortArray(left), self.sortArray(right))
-    def __init__(self):
-
-        self.sorted_nums = []
-
-    def merge_sort(self, left, right):
-
-        if left and right:
-            if left[0] >= right[0]:
-                self.sorted_nums.append(right.pop(0))
-            else:
-                self.sorted_nums.append(left.pop(0))
-        if left:
-            self.sorted_nums.append(left.pop(0))
-        if right:
-            self.sorted_nums.append(right.pop(0))
-        return self.sorted_nums
-
-    # 计数排序
+    # 2.计数排序
     def cnt_sort(self, nums): 
         max_num = max(nums)
         min_num = min(nums)
@@ -69,9 +43,29 @@ class Solution(object):
         return sorted_nums
 
 
+# 3. 归并排序
+def merge_sort(collection):
+
+    def merge(left, right):
+        '''merge left and right
+        :param left: left collection
+        :param right: right collection
+        :return: merge result
+        '''
+        result = []
+        while left and right:
+            result.append(left.pop(0) if left[0] <= right[0] else right.pop(0))
+        return result + left + right
+    if len(collection) <= 1:
+        return collection
+    mid = len(collection) // 2
+    return merge(merge_sort(collection[:mid]), merge_sort(collection[mid:]))
+
+
 if __name__ == "__main__":
     nums = [-4,0,7,4,9,-5,-1,0,-7,-1]
     S = Solution()
     # num = S.cnt_sort(nums)
-    num = S.sortArray(nums)
+    # num = S.sortArray(nums)
+    num = merge_sort(nums)
     print(num)

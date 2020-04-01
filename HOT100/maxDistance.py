@@ -14,7 +14,6 @@ class Solution(object):
         :rtype: int
         """
         distance = [[1e10]*len(grid[0]) for _ in range(len(grid))]
-        max_distance = -1
         dxys = [(1,0), (0,1), (-1,0), (0,-1)]
         que = []
         for x in range(len(grid)):
