@@ -69,3 +69,4 @@ if __name__ == "__main__":
     # num = S.sortArray(nums)
     num = merge_sort(nums)
     print(num)
+

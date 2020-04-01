@@ -10,7 +10,6 @@ def dfs(weight, article, n=0, value=0, max_value=0):
         max_value = value
     if n == len(article):
         # 已经挑选到了最后的一个物品:
-        # return max_value
         return max_value
     # 当前物品的重量
     weight_n = article[n][0]
@@ -23,26 +22,31 @@ def dfs(weight, article, n=0, value=0, max_value=0):
 
     return max_value
 
-# 2. 记忆优化
-def mem_dfs(weight, article, n=0, value=0, max_value=0):
-    if n == len(article):
-        # 已经挑选到了最后的一个物品:
-        # return max_value
-        return max_value
-    if dq[n][weight-1] != -1: 
-        return dq[n][weight]
-    if value>max_value:
-        max_value = value
-    # 当前物品的重量
-    weight_n = article[n][0]
-    if weight-weight_n < 0:
-        # 剩余的重量已经不足以挑选当前物品了
-        max_value = mem_dfs(weight, article, n+1, value, max_value)
+# 2. 方便记忆优化的深搜
+def dfs_plus(weight, article, n):
+
+    if len(article) == n: 
+        return 0
+    elif weight < article[n][0]:
+        ans = dfs_plus(weight, article, n+1)
     else:
-        max_value = mem_dfs(weight, article, n+1, value, max_value)
-        max_value = mem_dfs(weight-article[n][0], article, n+1, value+article[n][1], max_value)
-    dq[n][weight-1] = max_value
-    return max_value
+        ans = max(dfs_plus(weight, article, n+1), dfs_plus(weight-article[n][0], article, n+1) + article[n][1])
+    return ans
+    
+
+# 3. 记忆优化
+def dfs_mem(weight, article, n, dq):
+
+    if dq[n][weight] > 0:
+        return dq[n][weight]
+    if len(article) == n: 
+        return 0
+    elif weight < article[n][0]:
+        ans = dfs_plus(weight, article, n+1)
+    else:
+        ans = max(dfs_plus(weight, article, n+1), dfs_plus(weight-article[n][0], article, n+1) + article[n][1])
+    dq[n][weight] = ans
+    return ans
 
 
 if __name__ == "__main__":
@@ -53,7 +57,9 @@ if __name__ == "__main__":
     # ans = dfs(weight, article)
 
     # 定义记忆数组
-    dq = [[-1]*weight for _ in range(len(article))]
-    ans = mem_dfs(weight, article)
+    dq = [[-1]*(weight+1) for _ in range(len(article)+1)]
+    ans = dfs_mem(weight, article, 0, dq)
+    # ans = dfs_plus(weight, article, 0)
+    # ans = dfs(weight, article)
 
     print(ans)
