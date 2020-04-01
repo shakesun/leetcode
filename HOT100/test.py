@@ -42,3 +42,4 @@ if __name__ == "__main__":
     S = Solution()
     w = ["time", "me", "bell"]
     print(S.minimumLengthEncoding(w))
+    
