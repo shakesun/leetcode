@@ -32,7 +32,7 @@ def dfs_plus(weight, article, n):
     else:
         ans = max(dfs_plus(weight, article, n+1), dfs_plus(weight-article[n][0], article, n+1) + article[n][1])
     return ans
-    
+
 
 # 3. 记忆优化
 def dfs_mem(weight, article, n, dq):
@@ -48,6 +48,19 @@ def dfs_mem(weight, article, n, dq):
     dq[n][weight] = ans
     return ans
 
+# 4. 动态规划 1
+def dp(weight, article):
+
+    dq = [[-1]*(weight+1) for _ in range(len(article))]
+    for a in range(-len(article), 0):
+        for w in range(weight+1):
+            if article[a][0] > w:
+                dq[a][w] = dq[a+1][w]
+            else:
+                dq[a][w] = max(dq[a+1][w], dq[a+1][w-article[a][0]]+article[a][1])
+    print(dq)
+    return dq[0][weight]
+
 
 if __name__ == "__main__":
     
@@ -57,9 +70,10 @@ if __name__ == "__main__":
     # ans = dfs(weight, article)
 
     # 定义记忆数组
-    dq = [[-1]*(weight+1) for _ in range(len(article)+1)]
-    ans = dfs_mem(weight, article, 0, dq)
+    # dq = [[-1]*(weight+1) for _ in range(len(article)+1)]
+    # ans = dfs_mem(weight, article, 0, dq)
     # ans = dfs_plus(weight, article, 0)
     # ans = dfs(weight, article)
+    ans = dp(weight, article)
 
     print(ans)
