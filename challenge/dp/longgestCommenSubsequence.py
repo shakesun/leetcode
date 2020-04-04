@@ -1,4 +1,6 @@
-
+"""
+给定两个字符串，求这两个字符串的公告最长子序列长度
+"""
 
 def lcs(seq1, seq2):
     sub_seq = [[""]*(len(seq2)+1) for _ in range(len(seq1)+1)]
@@ -8,7 +10,6 @@ def lcs(seq1, seq2):
                 sub_seq[cnt_i+1][cnt_j+1] = sub_seq[cnt_i][cnt_j] + i
             else:
                 sub_seq[cnt_i+1][cnt_j+1] = max(sub_seq[cnt_i+1][cnt_j], sub_seq[cnt_i][cnt_j+1])
-    print(sub_seq)
     return sub_seq[len(seq1)][len(seq2)]
 
 if __name__ == "__main__":
