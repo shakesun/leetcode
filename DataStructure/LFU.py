@@ -19,10 +19,10 @@ class LFUCache:
 
     def put(self, key: int, value: int) -> None:
         if self.data.__len__() >= self.capacity:
-            useless_v = [0,-1e100,1e100]
+            useless_v = [0,1e100,1e100]
             useless_k = None
             for k,v in self.data.items():
-                if v[1] > useless_v[1]:
+                if v[1] < useless_v[1]:
                     useless_k = k
                     useless_v = v
                 elif v[1] == useless_v[1]:
