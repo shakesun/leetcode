@@ -86,6 +86,15 @@ def dp1(weight, article):
 #     print(dq)
 #     return dq[0][weight]
 
+# 6. 动态规划 3
+def dp3(weight, article):
+
+    dq = [0]*(weight+1) 
+    for a in range(len(article)):
+        for w in range(weight, article[a][0]-1, -1):
+            dq[w] = max(dq[w], dq[w-article[a][0]]+article[a][1])
+    print(dq)
+    return dq[weight]
 
 if __name__ == "__main__":
     
@@ -99,8 +108,9 @@ if __name__ == "__main__":
     # ans = dfs_mem(weight, article, 0, dq)
     # ans = dfs_plus(weight, article, 0, dq)
     # ans = dfs(weight, article)
-    ans = dp1(weight, article)
+    # ans = dp1(weight, article)
     # ans = dp2(weight, article)
+    ans = dp3(weight, article)
     # [[-1, -1, -1, -1, -1, 7], [-1, -1, -1, 7, -1, 6], [-1, -1, 7, 7, 6, 6], [7, 6, 7, 5, 4, 2], [-1, -1, -1, -1, -1, -1]]
     # [[-1, -1, -1, -1, -1, 7], [-1, -1, -1, 4, -1, 6], [-1, -1, 2, 4, 4, 6], [0, 0, 2, 2, 2, 2], [-1, -1, -1, -1, -1, -1]]
     print(ans)
