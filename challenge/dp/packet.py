@@ -39,9 +39,9 @@ def _dfs_plus(weight, article, n, summ, dq):
     if len(article) == n: 
         return summ
     elif weight < article[n][0]:
-        ans = dfs_plus(weight, article, n+1, summ, dq)
+        ans = _dfs_plus(weight, article, n+1, summ, dq)
     else:
-        ans = max(dfs_plus(weight, article, n+1, summ, dq), dfs_plus(weight-article[n][0], article, n+1, summ+article[n][1], dq))
+        ans = max(_dfs_plus(weight, article, n+1, summ, dq), _dfs_plus(weight-article[n][0], article, n+1, summ+article[n][1], dq))
     dq[n][weight] = ans
     print(dq)
     return ans
@@ -74,17 +74,17 @@ def dp1(weight, article):
     return dq[len(article)][weight]
 
 # 5. 动态规划 2
-def dp2(weight, article):
+# def dp2(weight, article):
 
-    dq = [[-1]*(weight+1) for _ in range(len(article)+1)]
-    for a in range(-len(article), 0):
-        for w in range(weight+1):
-            if article[a][0] > w:
-                dq[a][w] = dq[a+1][w]
-            else:
-                dq[a][w] = max(dq[a+1][w], dq[a+1][w-article[a][0]]+article[a][1])
-    print(dq)
-    return dq[0][weight]
+#     dq = [[0]*(weight+1) for _ in range(len(article)+1)]
+#     for a in range(-len(article), 0):
+#         for w in range(weight+1):
+#             if article[a][0] > w:
+#                 dq[a][w] = dq[a+1][w]
+#             else:
+#                 dq[a][w] = max(dq[a+1][w], dq[a+1][w-article[a][0]]+article[a][1])
+#     print(dq)
+#     return dq[0][weight]
 
 
 if __name__ == "__main__":
@@ -99,8 +99,8 @@ if __name__ == "__main__":
     # ans = dfs_mem(weight, article, 0, dq)
     # ans = dfs_plus(weight, article, 0, dq)
     # ans = dfs(weight, article)
-    # ans = dp1(weight, article)
-    ans = dp2(weight, article)
+    ans = dp1(weight, article)
+    # ans = dp2(weight, article)
     # [[-1, -1, -1, -1, -1, 7], [-1, -1, -1, 7, -1, 6], [-1, -1, 7, 7, 6, 6], [7, 6, 7, 5, 4, 2], [-1, -1, -1, -1, -1, -1]]
     # [[-1, -1, -1, -1, -1, 7], [-1, -1, -1, 4, -1, 6], [-1, -1, 2, 4, 4, 6], [0, 0, 2, 2, 2, 2], [-1, -1, -1, -1, -1, -1]]
     print(ans)
