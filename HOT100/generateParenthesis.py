@@ -14,5 +14,25 @@ class Solution(object):
         # 如何找到n个括号m排列的通解
         # 性质
         # 栈 队列 树 字典 集合 链表
-        
-        pass
+        ans = []
+        def backtrack(S, left, right):
+            if len(S) == 2 * n:
+                ans.append(''.join(S))
+                return
+            if left < n:
+                S.append('(')
+                backtrack(S, left+1, right)
+                S.pop()
+            if right < left:
+                S.append(')')
+                backtrack(S, left, right+1)
+                S.pop()
+
+        backtrack([], 0, 0)
+        return ans
+
+if __name__ == "__main__":
+    S = Solution()
+    n = 3
+    ans = S.generateParenthesis(3)
+    print(ans)

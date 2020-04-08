@@ -93,7 +93,6 @@ def dp3(weight, article):
     for a in range(len(article)):
         for w in range(weight, article[a][0]-1, -1):
             dq[w] = max(dq[w], dq[w-article[a][0]]+article[a][1])
-    print(dq)
     return dq[weight]
 
 if __name__ == "__main__":

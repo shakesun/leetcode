@@ -1,6 +1,5 @@
 #  有n中重量和价值分别为wivi的物品，从中选取重量为W的物品，使得价值最大，同一种物品可以多次选择
 
-
 def compete_packet_dp1(weight, article):
     
     dq = [[0]*(weight+1) for _ in range(len(article)+1)]
