@@ -31,6 +31,64 @@ class Solution(object):
         backtrack([], 0, 0)
         return ans
 
+# 自己的解法，比较笨拙，判断括号是否有效使用了栈
+class Solution(object):
+
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        Parenthesis = []
+        allBracketStr = []
+        perStr = ""
+        allBracketStr = self.generateAllBracketStrByFor(n)
+        for brackets in allBracketStr:
+            if self.is_good_bracket(brackets):
+                Parenthesis.append(brackets)
+        # print(Parenthesis)
+        return Parenthesis
+
+    def is_good_bracket(self, brackets):
+        """
+        判断是否是合法的括号序列
+        """
+        stack = []
+        for s in brackets:
+            if len(stack) == 0:
+                stack.append(s)
+            else:
+                if stack[-1] == "(" and s == ")":
+                    stack.pop(-1)
+                else:
+                    stack.append(s)
+        if len(stack) == 0:
+            return True
+        else:
+            return False
+    
+    # 不适用栈判断括号是否有效
+    def valid(A):
+        bal = 0
+        for c in A:
+            if c == '(': bal += 1
+            else: bal -= 1
+            if bal < 0: return False
+        return bal == 0
+
+    def generateAllBracketStrByFor(self, n):
+        """
+        生成所有的可能的括号序列 数目为n！
+        """
+        ret = []
+        middle_ret = [""]
+        for _ in range(2*n):
+            middle_ret = [i + j for i in middle_ret for j in ["(", ")" ]]
+        for _ in middle_ret:
+            if _.count("(") == n:
+                ret.append(_)
+        return ret
+
 if __name__ == "__main__":
     S = Solution()
     n = 3

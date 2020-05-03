@@ -61,6 +61,30 @@ class Solution:
 
         return ans
 
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # 贪心
+        # max_sub = nums[-1]
+        # sub = 0 
+        # for _ in nums: 
+        #     sub += _ 
+        #     if max_sub < sub:
+        #         max_sub = sub
+        #     if sub < 0: 
+        #         sub = 0 
+        # return max_sub
+
+        # dp
+        for i in range(1, len(nums)):
+            if nums[i-1] > 0: 
+                nums[i] += nums[i-1]
+        
+        return max(nums)
+
 
 if __name__ == '__main__':
 
