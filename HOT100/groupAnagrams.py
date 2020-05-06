@@ -3,7 +3,6 @@
 
 # class Solution:
 #     # def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-
 #     #     ans = []
 #     #     def sub(strs, tmp): 
 #     #         nonlocal ans
@@ -47,12 +46,25 @@
 #         if not str2_list:
 #             return True 
 #         return False 
+
+# 前面自己写的超时了，没有想到用字典去标记实现O(1)选择
 import collections
 class Solution(object):
     def groupAnagrams(self, strs):
         ans = collections.defaultdict(list)
         for s in strs:
             ans[tuple(sorted(s))].append(s)
+        return ans.values()
+
+# 自己构建了字典序列
+class Solution(object):
+    def groupAnagrams(self, strs):
+        ans = collections.defaultdict(list)
+        for s in strs: 
+            key = [0]*26
+            for a in s:
+                key[ord(a) - ord("a")] += 1
+            ans[tuple(key)].append(s)
         return ans.values()
 
 if __name__ == "__main__":

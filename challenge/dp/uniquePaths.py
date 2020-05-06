@@ -27,6 +27,6 @@ class Solution(object):
         #     for j in range(1, m):
         #         dq[i][j] = dq[i-1][j] + dq[i][j-1]
 
-        return dq[-1][-1]
+        # return dq[-1][-1]
         return int(math.factorial(m+n-2)/math.factorial(m-1)/math.factorial(n-1))
 
