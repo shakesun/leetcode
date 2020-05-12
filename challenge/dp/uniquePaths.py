@@ -19,7 +19,8 @@ class Solution(object):
         :rtype: int
 
         """
-        # bfs到n层时候的叶子节点数目 O(m*n)
+        # 动态转移方程
+        # dp[i][j] = dp[i-1][j] + dp[i][j-1]
         
         # dq = [[1]*m for i in range(n)]
 

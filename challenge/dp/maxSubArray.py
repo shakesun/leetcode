@@ -79,6 +79,7 @@ class Solution:
 #         # return max_sub
 
 #         # dp
+#         # 动态转移方程 dp[i] = dp[i] + dp[i-1]
 #         for i in range(1, len(nums)):
 #             if nums[i-1] > 0: 
 #                 nums[i] += nums[i-1]

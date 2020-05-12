@@ -3,6 +3,9 @@
 """
 
 def lcs(seq1, seq2):
+    # 动态转移方程
+    # dp[i+1][j+1] = dp[i][j] + 1
+    # dp[i+1][j+1] = max(dp[i+1][j], dp[i][j+1])
     sub_seq = [[""]*(len(seq2)+1) for _ in range(len(seq1)+1)]
     for cnt_i, i in enumerate(seq1):
         for cnt_j, j in enumerate(seq2):

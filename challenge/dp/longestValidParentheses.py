@@ -17,6 +17,10 @@ class Solution(object):
         #             max_val = y - x
 
         # 动态规划解决
+        # 动态转移方程
+        #  dp[i] = dp[i-2] + 2
+        #  dp[i] = dp[i-1] + dp[i-dp[i-1] -2] + 2
+        
         if not s:
             return 0
         dq = [0]*len(s)
