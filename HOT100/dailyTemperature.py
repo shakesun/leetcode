@@ -18,8 +18,7 @@ class Solution:
                     tmp = stack.pop(-1)
                     ans[tmp[0]] = i - tmp[0]
                 left = i
-                
-        return ans 
+        return ans
 
 if __name__ == "__main__":
     S = Solution()
